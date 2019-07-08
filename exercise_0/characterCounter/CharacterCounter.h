@@ -1,37 +1,28 @@
 //
 // Created by emyrmak on 7/3/2019.
 //
-
-#ifndef CHARACTERCOUNTERAPP_CHARACTERCOUNTER_H
-#define CHARACTERCOUNTERAPP_CHARACTERCOUNTER_H
-
+#pragma once
 #include <string>
-
-using namespace std;
-
 
 class CharacterCounter {
 
-    private:
-        string const VOWELS = "aeiouy";
-        int vowelsCount;
-        int consonantsCount;
-        int digitsCount;
-        int othersCount;
+public:
+    CharacterCounter() = default;
+    void checkCharacter(std::string& word);
+    void printCounts() const;
 
-        void stepVowelsCount();
-        void stepConsonantsCount();
-        void stepDigitsCount();
-        void stepOthersCount();
+private:
+    const std::string VOWELS = "aeiouy";
+    int vowelsCount{};
+    int consonantsCount{};
+    int digitsCount{};
+    int othersCount{};
 
-        bool isVowel(char character);
-    public:
-        CharacterCounter();
+    void stepVowelsCount();
+    void stepConsonantsCount();
+    void stepDigitsCount();
+    void stepOthersCount();
 
-        void checkCharacter(string word);
-        void getCounts();
-
+    bool isVowel(const char& character) const;
 };
 
-
-#endif //CHARACTERCOUNTERAPP_CHARACTERCOUNTER_H

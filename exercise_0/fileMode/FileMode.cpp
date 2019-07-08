@@ -6,17 +6,16 @@
 #include <iostream>
 #include <fstream>
 
-int FileMode::run(const string &path) {
-    ifstream  file;
-    file.open(path);
-    if (file) {
-        while(file >> inputText) {
-            characterCounter.checkCharacter(inputText);
-        }
-        characterCounter.getCounts();
-        file.close();
-        return 0;
+int FileMode::run(const std::string &path) {
+    std::cout << "Reading from file: " << path << std::endl;
+    std::ifstream  file(path);
+    if (!file) {
+        std::cerr << "File not found" << std::endl;
+        return 1;
     }
-    cerr << "File not found" << endl;
-    return 1;
+    while(file >> inputText) {
+        characterCounter.checkCharacter(inputText);
+    }
+    characterCounter.printCounts();
+    return 0;
 }

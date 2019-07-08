@@ -5,7 +5,7 @@ int main(int argc, char **argv) {
 
     if (argc == 1){
         TerminalMode terminalMode;
-        terminalMode.run();
+        return terminalMode.run();
     } else if (argc == 2) {
         FileMode fileMode;
         return fileMode.run(argv[1]);

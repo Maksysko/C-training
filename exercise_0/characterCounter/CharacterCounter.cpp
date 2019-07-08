@@ -4,36 +4,28 @@
 #include <iostream>
 #include "CharacterCounter.h"
 
-CharacterCounter::CharacterCounter() {
-    vowelsCount = 0;
-    consonantsCount = 0;
-    digitsCount = 0;
-    othersCount = 0;
-
-}
-
 void CharacterCounter::stepVowelsCount() {
-    vowelsCount++;
+    ++vowelsCount;
 }
 
 void CharacterCounter::stepConsonantsCount() {
-    consonantsCount++;
+    ++consonantsCount;
 }
 
 void CharacterCounter::stepDigitsCount() {
-    digitsCount++;
+    ++digitsCount;
 }
 
 void CharacterCounter::stepOthersCount() {
-    othersCount++;
+    ++othersCount;
 }
 
-bool CharacterCounter::isVowel(char character) {
-    return VOWELS.find(character) != string::npos;
+bool CharacterCounter::isVowel(const char& character) const {
+    return VOWELS.find(character) != std::string::npos;
 }
 
-void CharacterCounter::checkCharacter(string word) {
-    char firstCharacter = tolower(word[0]);
+void CharacterCounter::checkCharacter(std::string& word) {
+    const auto firstCharacter = tolower(word[0]);
     if (isalpha(firstCharacter)){
         if (isVowel(firstCharacter)){
             stepVowelsCount();
@@ -49,11 +41,11 @@ void CharacterCounter::checkCharacter(string word) {
     }
 }
 
-void CharacterCounter::getCounts() {
-    cout << "Vowels Count: " << vowelsCount << endl;
-    cout << "Consonants Count: " << consonantsCount << endl;
-    cout << "Digits Count: " << digitsCount << endl;
-    cout << "Others Symbol Count: " << othersCount << endl;
+void CharacterCounter::printCounts() const {
+    std::cout << "Vowels Count: " << vowelsCount << std::endl;
+    std::cout << "Consonants Count: " << consonantsCount << std::endl;
+    std::cout << "Digits Count: " << digitsCount << std::endl;
+    std::cout << "Others Symbol Count: " << othersCount <<std::endl;
 }
 
 
