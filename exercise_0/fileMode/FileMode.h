@@ -3,7 +3,7 @@
 //
 #pragma once
 #include <string>
-#include "../characterCounter/CharacterCounter.h"
+#include "CharacterCounter.h"
 
 class FileMode {
 private:

@@ -1,34 +1,33 @@
 //
 // Created by emyrmak on 7/9/2019.
 //
+#pragma once;
 #include <limits>
 #include <vector>
+#include "Vertices.h";
+
+using Matrix = std::vector<std::vector<int>>;
+using intVector = std::vector<int>;
+using boolVector = std::vector<bool>;
 
 class Graph {
-private:
-    const int infinity = std::numeric_limits<int>::max();
-    int startVertex;
-    int endVertex;
-    const int size;
-    int** matrix;
-
-    bool* visited;
-    int* distance;
-
-    bool readStartEndVertex();
-
-    void getShortestWay();
-
-//    std::vector<std::vector<int>> way;
-    std::string* way;
 public:
-    Graph(int& size_t, std::vector<std::vector<int>>& graph);
+    Graph(Vertices& vertices);
     ~Graph();
-
     void go();
-
-    void print();
-
+private:
+    const int maxInt = std::numeric_limits<int>::max();
+    const int size;
+    int startVertex, endVertex;
+    Matrix matrix, way;
+    boolVector visited;
+    intVector distance;
+    bool isWay(const int currentVertex, const int vertex) const;
+    bool isWayShorter(const int currentVertex, const int vertex) const;
+    bool readStartEndVertex();
+    void getShortestWay();
+    void createWay(const int currentVertex, const int vertex);
+    void printWay(const int vertex) const;
 };
 
 

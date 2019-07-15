@@ -2,7 +2,7 @@
 // Created by emyrmak on 7/3/2019.
 //
 #pragma once
-#include "../characterCounter/CharacterCounter.h"
+#include "CharacterCounter.h"
 
 class TerminalMode {
 

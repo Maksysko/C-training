@@ -16,6 +16,6 @@ int FileMode::run(const std::string &path) {
     while(file >> inputText) {
         characterCounter.checkCharacter(inputText);
     }
-    characterCounter.printCounts();
+    std::cout << characterCounter;
     return 0;
 }

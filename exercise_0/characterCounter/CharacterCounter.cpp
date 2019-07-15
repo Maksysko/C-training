@@ -41,12 +41,19 @@ void CharacterCounter::checkCharacter(std::string& word) {
     }
 }
 
-void CharacterCounter::printCounts() const {
-    std::cout << "Vowels Count: " << vowelsCount << std::endl;
-    std::cout << "Consonants Count: " << consonantsCount << std::endl;
-    std::cout << "Digits Count: " << digitsCount << std::endl;
-    std::cout << "Others Symbol Count: " << othersCount <<std::endl;
+std::ostream &operator<<(std::ostream &out, const CharacterCounter &obj) {
+    return out << "Vowels Count: " << obj.vowelsCount << std::endl
+               << "Consonants Count: " << obj.consonantsCount << std::endl
+               << "Digits Count: " << obj.digitsCount << std::endl
+               << "Others Symbol Count: " << obj.othersCount <<std::endl;
 }
+
+//void CharacterCounter: {
+//    std::cout << "Vowels Count: " << vowelsCount << std::endl;
+//    std::cout << "Consonants Count: " << consonantsCount << std::endl;
+//    std::cout << "Digits Count: " << digitsCount << std::endl;
+//    std::cout << "Others Symbol Count: " << othersCount <<std::endl;
+//}
 
 
 

@@ -1,19 +1,18 @@
-#include "Graph/Graph.h"
+#include "Graph.h"
+#include "Vertices.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <algorithm>
 
-
-int getGraphData(const std::string& path, std::vector<std::vector<int>>& vector);
+void getGraphData(const std::string& path, Vertices& vertices);
 
 int main() {
-
-    std::vector<std::vector<int>> graphVertex;
-    int vertexCount = getGraphData("C:\\Users\\emyrmak\\Desktop\\git\\C-training\\graph\\graph.txt", graphVertex);
-
-    Graph graph(vertexCount, graphVertex);
+    const std::string pathToFile =  "C:\\Users\\emyrmak\\Desktop\\git\\C-training\\graph\\graph.txt";
+    Vertices vertices;
+    getGraphData(pathToFile, vertices);
+    Graph graph(vertices);
     char q = ' ';
     while (q!='q'){
         graph.go();
@@ -23,22 +22,13 @@ int main() {
     return 0;
 }
 
-
-int getGraphData(const std::string& path, std::vector<std::vector<int>>& graphVertex){
-    std::vector<int> node;
-    std::vector<int> vertex;
+void getGraphData(const std::string& path, Vertices& vertices){
     std::ifstream graph(path);
-    int x, y, weight, vertexCount;
+    int x, y, weight;
     if (!graph){
         exit(1);
     }
     while (graph >> x >> y >> weight){
-        node = {x, y, weight};
-        graphVertex.push_back(node);
-        vertex.push_back(x);
-        vertex.push_back(y);
+        vertices.addVertex(x, y, weight);
     }
-    sort(vertex.begin(), vertex.end());
-    vertexCount = std::distance(vertex.begin(), std::unique(vertex.begin(), vertex.end()));
-    return vertexCount;
 }

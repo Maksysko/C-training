@@ -15,12 +15,12 @@ int TerminalMode::run() {
         std::cout << "Type #i to print results" << std::endl;
         while (std::cin >> inputText && inputText != exit) {
             if (inputText == info) {
-                characterCounter.printCounts();
+                std::cout << characterCounter;
                 continue;
             }
             characterCounter.checkCharacter(inputText);
         }
-        characterCounter.printCounts();
+        std::cout << characterCounter;
         return 0;
     } catch (const std::exception& ex){
         std::cerr << ex.what() << std::endl;

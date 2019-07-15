@@ -3,9 +3,6 @@ project(exercise_0)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(characterCounter)
-include_directories(fileMode)
-include_directories(terminalMode)
 
 add_executable(exercise_0
         characterCounter/CharacterCounter.cpp
@@ -15,3 +12,8 @@ add_executable(exercise_0
         terminalMode/TerminalMode.cpp
         terminalMode/TerminalMode.h
         main.cpp)
+
+target_include_directories(exercise_0 PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/characterCounter
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/fileMode
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/terminalMode)

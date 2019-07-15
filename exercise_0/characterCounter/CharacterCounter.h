@@ -3,13 +3,13 @@
 //
 #pragma once
 #include <string>
-
+#include <iostream>
 class CharacterCounter {
 
 public:
     CharacterCounter() = default;
     void checkCharacter(std::string& word);
-    void printCounts() const;
+    friend std::ostream& operator << (std::ostream& out, const CharacterCounter& obj);
 
 private:
     const std::string VOWELS = "aeiouy";

@@ -1,5 +1,5 @@
-#include "fileMode/FileMode.h"
-#include "terminalMode/TerminalMode.h"
+#include "FileMode.h"
+#include "TerminalMode.h"
 
 int main(int argc, char **argv) {
 
