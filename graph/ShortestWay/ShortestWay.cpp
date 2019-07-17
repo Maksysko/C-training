@@ -3,34 +3,37 @@
 //
 #include <string>
 #include <iostream>
-#include "Graph.h"
+#include "ShortestWay.h"
 
 
-Graph::Graph(Vertices& vertices) :
+ShortestWay::ShortestWay(Vertices& vertices) :
 size(vertices.getUniqueVerticesCount()),
 visited(size, false),
 distance(size, maxInt),
 matrix(size, intVector(size, 0)),
-way(size, intVector())
+way(size, intVector()),
+startNodeIndex(0),
+endNodeIndex(1),
+pathWeightIndex(2)
 {
     for (int i = 0; i < vertices.getSize(); ++i)
     {
-        int startNode = vertices.getVertexData(i, 0);
-        int endNode = vertices.getVertexData(i, 1);
-        int pathWeight = vertices.getVertexData(i, 2);
+        int startNode = vertices.getVertexData(i, startNodeIndex);
+        int endNode = vertices.getVertexData(i, endNodeIndex);
+        int pathWeight = vertices.getVertexData(i, pathWeightIndex);
         matrix[startNode][endNode] = pathWeight;
     }
 }
 
-void Graph::go()
+void ShortestWay::findShortestWay(int startPoint, int endPoint)
 {
-    if (readStartEndVertex())
-    {
-        getShortestWay();
-    }
+    startVertex = startPoint;
+    endVertex = endPoint;
+    computeShortestWay();
+    printWay();
 }
 
-void Graph::getShortestWay()
+void ShortestWay::computeShortestWay()
 {
     for (int i = 0; i < size; ++i)
     {
@@ -59,29 +62,13 @@ void Graph::getShortestWay()
             }
          }
      }
-     std::cout << "The best way from " << startVertex << " to " << endVertex << " is: " << distance[endVertex] << " distance points" << std::endl << "Way is: ";
-     printWay(endVertex);
-     std::cout << std::endl;
-}
-bool Graph::readStartEndVertex()
-{
-    std::cout << "Enter start point:";
-    std::cin >> startVertex;
-    std::cout << "Enter end point:";
-    std::cin >> endVertex;
-    std::cout << std::endl;
-    if (endVertex == startVertex){
-        std::cout << "You are already here :)" << std::endl << std::endl;
-        return false;
-    }
-    return true;
 }
 
-Graph::~Graph() {
+ShortestWay::~ShortestWay() {
 
 }
 
-void Graph::createWay(const int currentVertex, const int vertex)
+void ShortestWay::createWay(int currentVertex, int vertex)
 {
     way[vertex].clear();
     for (int i = 0; i < way[currentVertex].size(); ++i)
@@ -91,26 +78,28 @@ void Graph::createWay(const int currentVertex, const int vertex)
     way[vertex].push_back(vertex);
 }
 
-void Graph::printWay(const int vertex) const
+void ShortestWay::printWay() const
 {
-    for (int i = 0; i < way[vertex].size(); ++i)
+    std::cout << "The best way from " << startVertex << " to " << endVertex << " is: " << distance[endVertex] << " distance points" << std::endl << "Way is: ";
+    for (int i = 0; i < way[endVertex].size(); ++i)
     {
-        if (i < way[vertex].size() - 1)
+        if (i < way[endVertex].size() - 1)
         {
-            std::cout << way[vertex][i] << " -> ";
+            std::cout << way[endVertex][i] << " -> ";
         } else
         {
-            std::cout << way[vertex][i] << std::endl;
+            std::cout << way[endVertex][i] << std::endl;
         }
     }
+    std::cout << std::endl;
 }
 
-bool Graph::isWay(const int currentVertex, const int vertex) const
+bool ShortestWay::isWay(int currentVertex, int vertex) const
 {
     return matrix[currentVertex][vertex] && distance[currentVertex]!= maxInt;
 }
 
-bool Graph::isWayShorter(const int currentVertex, const int vertex) const
+bool ShortestWay::isWayShorter(int currentVertex, int vertex) const
 {
     return distance[currentVertex] + matrix[currentVertex][vertex] < distance[vertex];
 }

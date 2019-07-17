@@ -2,18 +2,18 @@
 // Created by emyrmak on 7/15/2019.
 //
 
-#pragma once;
+#pragma once
 #include <vector>
 using Matrix = std::vector<std::vector<int>>;
 
 class Vertices {
 public:
-    void addVertex(const int startVertex, const int endVertex, const int weight);
+    void addVertex(int startVertex, int endVertex, int weight);
     int getUniqueVerticesCount() const;
     int getSize() const;
-    int getVertexData(const int row, const int col) const;
+    int getVertexData(int row, int col) const;
 private:
-    void addUniqueVertex(const int vertex);
+    void addUniqueVertex(int vertex);
     Matrix vertices;
     std::vector<int> uniqueVertices;
 };
