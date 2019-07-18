@@ -13,18 +13,19 @@ using boolVector = std::vector<bool>;
 class ShortestWay  {
 public:
     ShortestWay (Vertices& vertices);
-    ~ShortestWay ();
+    ~ShortestWay () = default;
     void findShortestWay(int startPoint, int endPoint);
 private:
-    const int maxInt = std::numeric_limits<int>::max();
+    static const int maxInt = std::numeric_limits<int>::max();
+    static const int startNodeIndex;
+    static const int endNodeIndex;
+    static const int pathWeightIndex;
     const std::size_t size;
-    const int startNodeIndex;
-    const int endNodeIndex;
-    const int pathWeightIndex;
     int startVertex, endVertex;
     Matrix matrix, way;
     boolVector visited;
     intVector distance;
+private:
     bool isWay(int currentVertex, int vertex) const;
     bool isWayShorter(int currentVertex, int vertex) const;
     void computeShortestWay();

@@ -11,10 +11,7 @@ size(vertices.getUniqueVerticesCount()),
 visited(size, false),
 distance(size, maxInt),
 matrix(size, intVector(size, 0)),
-way(size, intVector()),
-startNodeIndex(0),
-endNodeIndex(1),
-pathWeightIndex(2)
+way(size, intVector())
 {
     for (int i = 0; i < vertices.getSize(); ++i)
     {
@@ -24,6 +21,10 @@ pathWeightIndex(2)
         matrix[startNode][endNode] = pathWeight;
     }
 }
+
+const int ShortestWay::startNodeIndex = 0;
+const int ShortestWay::endNodeIndex = 1;
+const int ShortestWay::pathWeightIndex = 2;
 
 void ShortestWay::findShortestWay(int startPoint, int endPoint)
 {
@@ -62,10 +63,6 @@ void ShortestWay::computeShortestWay()
             }
          }
      }
-}
-
-ShortestWay::~ShortestWay() {
-
 }
 
 void ShortestWay::createWay(int currentVertex, int vertex)
