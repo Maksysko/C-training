@@ -6,6 +6,8 @@
 #include <vector>
 #include <algorithm>
 
+void printWay(ShortestWay& shortestWay);
+
 void getGraphData(const std::string& path, Vertices& vertices);
 
 int main() {
@@ -26,6 +28,8 @@ int main() {
         }
         else {
             shortestWay.findShortestWay(startPoint, endPoint);
+            printWay(shortestWay);
+
         }
         std::cout << "Type q to exit. Type any other to continue..." << std::endl;
         std::cin >> q;
@@ -43,3 +47,60 @@ void getGraphData(const std::string& path, Vertices& vertices){
         vertices.addVertex(x, y, weight);
     }
 }
+
+void printWay(ShortestWay& shortestWay)
+{
+    std::cout << "The best way from " << shortestWay.getStartVertex() << " to " << shortestWay.getEndVertex() << " is: " << shortestWay.getShortestDistance() << " distance points" << std::endl << "Way is: ";
+    intVector way = shortestWay.getShortestWay();
+    for (int i = 0; i < way.size(); ++i)
+    {
+        if (i < way.size() - 1)
+        {
+            std::cout << way[i] << " -> ";
+        } else
+        {
+            std::cout << way[i] << std::endl;
+        }
+    }
+    std::cout << std::endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

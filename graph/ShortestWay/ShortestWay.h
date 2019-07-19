@@ -15,6 +15,10 @@ public:
     ShortestWay (Vertices& vertices);
     ~ShortestWay () = default;
     void findShortestWay(int startPoint, int endPoint);
+    int getStartVertex() const;
+    int getEndVertex() const;
+    int getShortestDistance() const;
+    intVector getShortestWay() const;
 private:
     static const int maxInt = std::numeric_limits<int>::max();
     static const int startNodeIndex;
@@ -23,14 +27,12 @@ private:
     const std::size_t size;
     int startVertex, endVertex;
     Matrix matrix, way;
-    boolVector visited;
     intVector distance;
 private:
     bool isWay(int currentVertex, int vertex) const;
     bool isWayShorter(int currentVertex, int vertex) const;
     void computeShortestWay();
     void createWay(int currentVertex, int vertex);
-    void printWay() const;
 };
 
 

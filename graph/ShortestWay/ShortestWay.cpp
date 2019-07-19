@@ -8,7 +8,6 @@
 
 ShortestWay::ShortestWay(Vertices& vertices) :
 size(vertices.getUniqueVerticesCount()),
-visited(size, false),
 distance(size, maxInt),
 matrix(size, intVector(size, 0)),
 way(size, intVector())
@@ -31,14 +30,13 @@ void ShortestWay::findShortestWay(int startPoint, int endPoint)
     startVertex = startPoint;
     endVertex = endPoint;
     computeShortestWay();
-    printWay();
 }
 
 void ShortestWay::computeShortestWay()
 {
+    boolVector visited(size, false);
     for (int i = 0; i < size; ++i)
     {
-         visited[i] = false;
          distance[i] = maxInt;
          way[i].clear();
     }
@@ -75,22 +73,6 @@ void ShortestWay::createWay(int currentVertex, int vertex)
     way[vertex].push_back(vertex);
 }
 
-void ShortestWay::printWay() const
-{
-    std::cout << "The best way from " << startVertex << " to " << endVertex << " is: " << distance[endVertex] << " distance points" << std::endl << "Way is: ";
-    for (int i = 0; i < way[endVertex].size(); ++i)
-    {
-        if (i < way[endVertex].size() - 1)
-        {
-            std::cout << way[endVertex][i] << " -> ";
-        } else
-        {
-            std::cout << way[endVertex][i] << std::endl;
-        }
-    }
-    std::cout << std::endl;
-}
-
 bool ShortestWay::isWay(int currentVertex, int vertex) const
 {
     return matrix[currentVertex][vertex] && distance[currentVertex]!= maxInt;
@@ -99,4 +81,20 @@ bool ShortestWay::isWay(int currentVertex, int vertex) const
 bool ShortestWay::isWayShorter(int currentVertex, int vertex) const
 {
     return distance[currentVertex] + matrix[currentVertex][vertex] < distance[vertex];
+}
+
+int ShortestWay::getStartVertex() const {
+    return startVertex;
+}
+
+int ShortestWay::getEndVertex() const {
+    return endVertex;
+}
+
+int ShortestWay::getShortestDistance() const {
+    return distance[endVertex];
+}
+
+intVector ShortestWay::getShortestWay() const {
+    return way[endVertex];
 }
