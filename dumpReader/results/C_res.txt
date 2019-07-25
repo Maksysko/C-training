@@ -1,0 +1,3 @@
+0 Math 1
+1 Physics 3
+2 History 0
